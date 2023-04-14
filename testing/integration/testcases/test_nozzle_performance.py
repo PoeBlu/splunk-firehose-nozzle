@@ -85,9 +85,11 @@ class TestNozzlePerformance:
             update_nozzle_manifest(nozzle_name='splunk-firehose-nozzle-perf', instances=nozzle_instance)
             deploy_nozzle_to_pcf()
         timestamp = int(time.time())
-        self.data_gen_name = 'datagen_{}'.format(timestamp)
+        self.data_gen_name = f'datagen_{timestamp}'
         events = data_gen_eps*300
-        nozzle_logger.info("Running data-gen: {} to generate {} events".format(self.data_gen_name, events))
+        nozzle_logger.info(
+            f"Running data-gen: {self.data_gen_name} to generate {events} events"
+        )
         update_data_gen_manifest(input_dict={'name': self.data_gen_name,
                                              'env': {'GOPACKAGENAME': 'main', 'EPS': data_gen_eps,
                                                      'SPLUNK_INDEX': 'pcfperf',

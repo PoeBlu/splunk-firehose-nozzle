@@ -32,11 +32,11 @@ def _extract_subset(source, mask):
 
 
 def _extract_dict_subset(source, mask):
-    target = {}
-    for key in mask:
-        if key in source:
-            target[key] = _extract_subset(source[key], mask[key])
-    return target
+    return {
+        key: _extract_subset(source[key], mask[key])
+        for key in mask
+        if key in source
+    }
 
 
 MISSING = object()

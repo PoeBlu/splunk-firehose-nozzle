@@ -11,11 +11,12 @@ class TestSplunkNozzle():
         self.splunk_api = SplunkApi(test_env, splunk_logger)
 
         search_results = self.splunk_api.check_events_from_splunk(
-            query="index={}".format(test_env['splunk_index']),
-            start_time="-15m@m")
+            query=f"index={test_env['splunk_index']}", start_time="-15m@m"
+        )
 
-        assert len(search_results) > 0, \
-            '\nNumber of events from Splunk should not be {}, however the result is {}'.format(0, len(search_results))
+        assert (
+            len(search_results) > 0
+        ), f'\nNumber of events from Splunk should not be 0, however the result is {len(search_results)}'
 
     @pytest.mark.Critical
     @pytest.mark.parametrize("query_input", [
@@ -29,8 +30,9 @@ class TestSplunkNozzle():
         search_results = self.splunk_api.check_events_from_splunk(
             query=query_input.format(test_env['splunk_index']),
             start_time="-15m@m")
-        assert len(search_results) > 0, \
-            '\nNumber of events from Splunk should not be {}, however the result is {}'.format(0, len(search_results))
+        assert (
+            len(search_results) > 0
+        ), f'\nNumber of events from Splunk should not be 0, however the result is {len(search_results)}'
 
     @pytest.mark.Critical
     @pytest.mark.parametrize("query_input", [
@@ -43,8 +45,9 @@ class TestSplunkNozzle():
         search_results = self.splunk_api.check_events_from_splunk(
             query=query_input,
             start_time="-15m@m")
-        assert len(search_results) == 0, \
-            '\nNumber of events from Splunk should be {}, however the result is {}'.format(0, len(search_results))
+        assert (
+            len(search_results) == 0
+        ), f'\nNumber of events from Splunk should be 0, however the result is {len(search_results)}'
 
     @pytest.mark.Critical
     @pytest.mark.parametrize("query_input", [
@@ -59,8 +62,9 @@ class TestSplunkNozzle():
         search_results = self.splunk_api.check_events_from_splunk(
             query=query_input.format(test_env['splunk_index']),
             start_time="-15m@m")
-        assert len(search_results) > 0, \
-            '\nNumber of events from Splunk should not be {}, however the result is {}'.format(0, len(search_results))
+        assert (
+            len(search_results) > 0
+        ), f'\nNumber of events from Splunk should not be 0, however the result is {len(search_results)}'
 
     @pytest.mark.Critical
     @pytest.mark.parametrize("query_input", [
@@ -76,8 +80,9 @@ class TestSplunkNozzle():
         search_results = self.splunk_api.check_events_from_splunk(
             query=query_input.format(test_env['splunk_index']),
             start_time="-15m@m")
-        assert len(search_results) > 0, \
-            '\nNumber of events from Splunk should not be {}, however the result is {}'.format(0, len(search_results))
+        assert (
+            len(search_results) > 0
+        ), f'\nNumber of events from Splunk should not be 0, however the result is {len(search_results)}'
 
     @pytest.mark.Critical
     @pytest.mark.parametrize("query_input", [
@@ -89,8 +94,9 @@ class TestSplunkNozzle():
         search_results = self.splunk_api.check_events_from_splunk(
             query=query_input.format(test_env['splunk_index']),
             start_time="-15m@m")
-        assert len(search_results) > 0, \
-            '\nNumber of events from Splunk should not be {}, however the result is {}'.format(0, len(search_results))
+        assert (
+            len(search_results) > 0
+        ), f'\nNumber of events from Splunk should not be 0, however the result is {len(search_results)}'
 
     @pytest.mark.Critical
     @pytest.mark.parametrize("query_input", [
@@ -103,8 +109,9 @@ class TestSplunkNozzle():
         search_results = self.splunk_api.check_events_from_splunk(
             query=query_input.format(test_env['splunk_index']),
             start_time="-15m@m")
-        assert len(search_results) == 0, \
-            '\nNumber of events from Splunk should be {}, however the result is {}'.format(0, len(search_results))
+        assert (
+            len(search_results) == 0
+        ), f'\nNumber of events from Splunk should be 0, however the result is {len(search_results)}'
 
     @pytest.mark.Critical
     @pytest.mark.parametrize("query_input", [

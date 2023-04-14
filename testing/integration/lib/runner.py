@@ -36,7 +36,7 @@ def start_local_nozzle_binary(time_interval=20):
 
 
 def deploy_nozzle_to_pcf():
-    cmd = "cd {}; make deploy-nozzle".format(_env_path)
+    cmd = f"cd {_env_path}; make deploy-nozzle"
     try:
         proc = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE,
                                 stderr=subprocess.STDOUT)
@@ -48,7 +48,7 @@ def deploy_nozzle_to_pcf():
 
 
 def deploy_date_gen_to_pcf():
-    cmd = "cd {}; make deploy-data-gen".format(_env_path)
+    cmd = f"cd {_env_path}; make deploy-data-gen"
     try:
         proc = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE,
                                 stderr=subprocess.STDOUT)
@@ -60,7 +60,7 @@ def deploy_date_gen_to_pcf():
 
 
 def delete_data_gen(name='data_gen'):
-    cmd = "cf delete {} -f".format(name)
+    cmd = f"cf delete {name} -f"
 
     try:
         proc = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE,
@@ -87,7 +87,7 @@ def delete_pcf_org():
 
 
 def wait_until_date_gen_done(name=None):
-    cmd = "cf logs {} --recent".format(name)
+    cmd = f"cf logs {name} --recent"
     try:
         while True:
             time.sleep(10)

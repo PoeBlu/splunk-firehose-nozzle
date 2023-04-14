@@ -10,11 +10,14 @@ _tag = ''.join(random.choices(string.ascii_uppercase + string.digits, k=6))
 class TestSplunkNozzleLocal():
     @pytest.fixture(scope='class', autouse=True)
     def setup_class(self, test_env, splunk_logger, nozzle_logger, test_setup):
-        update_environment_variables(input_dict={'EVENTS': 'LogMessage',
-                                                 'EXTRA_FIELDS': 'test_tag:{},test2.0:nozzle2.0'.format(_tag),
-                                                 'ENABLE_EVENT_TRACING': False,
-                                                 'ADD_APP_INFO': ''}
-                                     )
+        update_environment_variables(
+            input_dict={
+                'EVENTS': 'LogMessage',
+                'EXTRA_FIELDS': f'test_tag:{_tag},test2.0:nozzle2.0',
+                'ENABLE_EVENT_TRACING': False,
+                'ADD_APP_INFO': '',
+            }
+        )
 
         path = os.path.join(get_integration_folder(), "scripts")
         env_path = get_project_folder()
@@ -39,12 +42,13 @@ class TestSplunkNozzleLocal():
             start_time="-10m@m")
 
         if is_result_empty:
-            assert len(search_results) == 0, \
-                '\nNumber of events from Splunk should be {}, however the result is {}'.format(0, len(search_results))
+            assert (
+                len(search_results) == 0
+            ), f'\nNumber of events from Splunk should be 0, however the result is {len(search_results)}'
         else:
-            assert len(search_results) > 0, \
-                '\nNumber of events from Splunk should not be {}, however the result is {}'\
-                    .format(0, len(search_results))
+            assert (
+                len(search_results) > 0
+            ), f'\nNumber of events from Splunk should not be 0, however the result is {len(search_results)}'
 
     @pytest.mark.Critical
     @pytest.mark.parametrize("query_input, is_result_empty", [
@@ -59,12 +63,13 @@ class TestSplunkNozzleLocal():
             start_time="-10m@m")
 
         if is_result_empty:
-            assert len(search_results) == 0, \
-                '\nNumber of events from Splunk should be {}, however the result is {}'.format(0, len(search_results))
+            assert (
+                len(search_results) == 0
+            ), f'\nNumber of events from Splunk should be 0, however the result is {len(search_results)}'
         else:
-            assert len(search_results) > 0, \
-                '\nNumber of events from Splunk should not be {}, however the result is {}'\
-                    .format(0, len(search_results))
+            assert (
+                len(search_results) > 0
+            ), f'\nNumber of events from Splunk should not be 0, however the result is {len(search_results)}'
 
     @pytest.mark.Critical
     @pytest.mark.parametrize("query_input", [
@@ -78,8 +83,9 @@ class TestSplunkNozzleLocal():
             query=query_input.format(test_env['splunk_index'], _tag),
             start_time="-10m@m")
 
-        assert len(search_results) == 0, \
-            '\nNumber of events from Splunk should be {}, however the result is {}'.format(0, len(search_results))
+        assert (
+            len(search_results) == 0
+        ), f'\nNumber of events from Splunk should be 0, however the result is {len(search_results)}'
 
     @pytest.mark.Critical
     @pytest.mark.parametrize("query_input", [
@@ -94,5 +100,6 @@ class TestSplunkNozzleLocal():
             query=query_input.format(test_env['splunk_index'], _tag),
             start_time="-10m@m")
 
-        assert len(search_results) == 0, \
-            '\nNumber of events from Splunk should be {}, however the result is {}'.format(0, len(search_results))
+        assert (
+            len(search_results) == 0
+        ), f'\nNumber of events from Splunk should be 0, however the result is {len(search_results)}'

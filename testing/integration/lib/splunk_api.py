@@ -21,15 +21,14 @@ class SplunkApi():
         '''
         query = self.compose_search_query(query)
         try:
-            events = self.collect_events(query, start_time, end_time)
-            return events
+            return self.collect_events(query, start_time, end_time)
         except Exception as e:
             self.logger.error(e)
             raise
 
     @staticmethod
     def compose_search_query(query):
-        return "search {}".format(query)
+        return f"search {query}"
 
     def collect_events(self, query, start_time, end_time):
         '''
@@ -57,9 +56,7 @@ class SplunkApi():
 
         json_res = create_job.json()
         job_id = json_res['sid']
-        events = self.wait_for_job_and_get_events(job_id)
-
-        return events
+        return self.wait_for_job_and_get_events(job_id)
 
     def wait_for_job_and_get_events(self, job_id):
         '''
@@ -107,9 +104,7 @@ class SplunkApi():
             verify=False)
         self.check_request_status(event_job)
 
-        events = event_job.json()['results']
-
-        return events
+        return event_job.json()['results']
 
     def check_request_status(self, req_obj):
         '''
